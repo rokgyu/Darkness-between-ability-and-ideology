@@ -8,7 +8,7 @@
         :root {
             --bg-dark: #050a14;
             --bg-navy: #0a192f;
-            --accent: #00f2ff; /* 기본 형광 하늘색 */
+            --accent: #00f2ff;
             --accent-glow: rgba(0, 242, 255, 0.5);
             --glass: rgba(255, 255, 255, 0.05);
             --text: #ccd6f6;
@@ -17,7 +17,6 @@
             --viba-dark-red: #4a0000;
         }
 
-        /* 비바 테마 전환 로직은 유지: 텍스트 색상 등에 적용 */
         body.theme-viba {
             --accent: #ff0033;
             --accent-glow: rgba(255, 0, 51, 0.6);
@@ -33,18 +32,18 @@
             transition: 0.5s;
         }
 
+        /* [모바일 대응] 최신화 버튼 위치 조정 */
         .read-now {
-            position: fixed; top: 20px; right: 20px; z-index: 100;
-            padding: 10px 20px; background: rgba(0, 0, 0, 0.6);
+            position: fixed; top: 15px; right: 15px; z-index: 100;
+            padding: 8px 15px; background: rgba(0, 0, 0, 0.7);
             border: 1px solid var(--accent); color: var(--accent);
             text-decoration: none; border-radius: 5px; font-weight: bold;
-            transition: 0.3s; box-shadow: 0 0 10px var(--accent-glow);
+            font-size: 0.9rem; transition: 0.3s; box-shadow: 0 0 10px var(--accent-glow);
             backdrop-filter: blur(5px);
         }
-        .read-now:hover { background: var(--accent); color: #000; box-shadow: 0 0 20px var(--accent); }
 
         .hero {
-            height: 55vh; position: relative; display: flex;
+            height: 60vh; position: relative; display: flex;
             align-items: center; justify-content: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1); overflow: hidden;
         }
@@ -55,104 +54,90 @@
             z-index: 0; filter: brightness(0.35);
         }
 
-        .hero-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%; }
+        .hero-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; width: 90%; }
 
+        /* [모바일 대응] 타이틀 크기 유동적으로 변경 */
         .title {
-            font-size: 3.5rem; color: var(--text-bright);
+            font-size: clamp(1.8rem, 8vw, 3.5rem); color: var(--text-bright);
             text-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent);
             margin-bottom: 10px; transition: 0.5s;
         }
 
-        .subtitle { font-size: 1.2rem; opacity: 0.8; margin-bottom: 40px; }
+        .subtitle { font-size: clamp(0.9rem, 3vw, 1.2rem); opacity: 0.8; margin-bottom: 30px; word-break: keep-all; }
 
-        .main-nav { display: flex; gap: 150px; z-index: 10; justify-content: center; width: 100%; }
+        /* [모바일 대응] 네비게이션 간격 조정 */
+        .main-nav { display: flex; gap: clamp(20px, 10vw, 150px); z-index: 10; justify-content: center; width: 100%; }
         .nav-group { display: flex; flex-direction: column; align-items: center; position: relative; }
 
         .btn-main {
-            padding: 15px 45px; border: 2px solid var(--accent);
+            padding: 12px 25px; border: 2px solid var(--accent);
             background: transparent; color: var(--accent);
             font-weight: bold; border-radius: 50px; cursor: pointer;
-            transition: 0.3s; font-size: 1.1rem; box-shadow: 0 0 10px var(--accent-glow);
-        }
-        .btn-main:hover, .btn-main.active { background: var(--accent); color: #000; box-shadow: 0 0 25px var(--accent); }
-
-        .genealogy-svg { display: none; width: max-content; height: 120px; margin-top: -10px; pointer-events: none; z-index: 5; }
-        .magic-path {
-            fill: none; stroke: var(--accent); stroke-width: 4; stroke-linecap: round;
-            filter: drop-shadow(0 0 8px var(--accent)) drop-shadow(0 0 15px var(--accent));
-            stroke-dasharray: 1000; stroke-dashoffset: 1000; transition: 0.5s;
+            transition: 0.3s; font-size: clamp(0.85rem, 2.5vw, 1.1rem); box-shadow: 0 0 10px var(--accent-glow);
         }
 
-        @keyframes drawPath { to { stroke-dashoffset: 0; } }
-        .animate-path { animation: drawPath 0.8s ease-out forwards; }
-
-        .sub-menu { display: none; justify-content: center; gap: 20px; margin-bottom: 50px; opacity: 0; transform: translateY(-20px); transition: all 0.5s ease; }
+        .genealogy-svg { display: none; width: max-content; height: 80px; margin-top: -5px; pointer-events: none; }
+        
+        /* [모바일 대응] 서브메뉴 가로폭 조정 */
+        .sub-menu { display: none; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; opacity: 0; transform: translateY(-10px); transition: all 0.5s ease; }
         .sub-menu.show { display: flex; opacity: 1; transform: translateY(0); }
 
         .btn-sub {
-            width: 140px; padding: 12px 0; background: var(--glass);
+            width: 130px; padding: 10px 0; background: var(--glass);
             border: 1px solid var(--accent); color: #fff; border-radius: 5px;
-            cursor: pointer; transition: 0.3s; text-align: center;
-        }
-        .btn-sub:hover { background: var(--accent); color: #000; box-shadow: 0 0 15px var(--accent); }
-
-        #btn-viba-choice:hover {
-            background-color: var(--viba-dark-red) !important;
-            border-color: var(--viba-red) !important;
-            color: var(--viba-red) !important;
-            box-shadow: 0 0 30px var(--viba-red) !important;
+            cursor: pointer; transition: 0.3s; text-align: center; font-size: 0.9rem;
         }
 
-        .content-area { padding: 50px 20px; min-height: 50vh; max-width: 1100px; margin: 0 auto; }
-        .cat-intro { text-align: center; font-size: 1.2rem; color: var(--accent); margin-bottom: 40px; font-style: italic; transition: 0.5s; }
+        .content-area { padding: 30px 20px; min-height: 50vh; max-width: 1100px; margin: 0 auto; }
+        .cat-intro { text-align: center; font-size: 1.1rem; color: var(--accent); margin-bottom: 30px; font-style: italic; word-break: keep-all; }
 
         .worldview-box { 
             display: none; background: var(--glass); 
-            padding: 20px 40px 40px 40px; 
-            border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); 
+            padding: 25px; border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); 
         }
-        .worldview-box h2 { color: var(--accent); transition: 0.5s; margin-top: 0; margin-bottom: 20px; }
 
-        /* 캐릭터 리스트 컨테이너 */
-        .char-list { display: none; flex-direction: column; gap: 100px; }
+        .char-list { display: none; flex-direction: column; gap: 60px; }
 
-        /* 각 캐릭터 아이템 */
-        .char-item { display: flex; align-items: center; gap: 80px; } /* gap을 살짝 키워 밸런스를 맞춤 */
+        /* [핵심 수정] 모바일에서는 세로 배치로 전환 */
+        .char-item { display: flex; flex-direction: column; align-items: center; gap: 30px; width: 100%; }
         
-        /* 지그재그 배치 로직은 유지 */
-        .char-item:nth-child(even) { flex-direction: row-reverse; }
+        /* PC 화면(768px 이상)에서만 가로 배치 및 지그재그 적용 */
+        @media (min-width: 768px) {
+            .char-item { flex-direction: row; gap: 80px; }
+            .char-item:nth-child(even) { flex-direction: row-reverse; }
+            .char-img-box { height: 600px; flex: 1.3; }
+            .hero { height: 55vh; }
+            .read-now { top: 20px; right: 20px; padding: 10px 20px; font-size: 1rem; }
+        }
 
-        /* [핵심 수정] 캐릭터 이미지 박스 - 크기를 키우고 테두리 제거 */
+        /* [모바일 대응] 이미지 박스 높이 조정 */
         .char-img-box { 
-            flex: 1.3; /* 이미지가 더 많은 공간을 차지하도록 flex 값을 키움 */
-            height: 600px; /* 노란 박스처럼 높이를 더 높게 설정 (400 -> 550) */
-            background: none; /* 배경 투명하게 */
-            border: none; /* 테두리 제거 (색상 강조 안 함) */
+            width: 100%;
+            height: 350px;
+            background: none; 
+            border: none; 
             border-radius: 15px; 
             display: flex; align-items: center; justify-content: center; 
             overflow: hidden; 
             transition: 0.5s; 
         }
 
-        /* [핵심 수정] 이미지 연출: 스며든 듯한 투명도 적용 */
         .char-img-box img { 
-            transform: scale(1.2);
+            transform: scale(1.1);
             width: 100%; height: 100%; 
-            object-fit: cover; /* 이미지가 박스에 꽉 차게 배치 */
-            object-position: center 20%; /* 상반신(얼굴) 위주로 자름 (또는 center top) */
-            opacity: 0.4; /* 60% 투명도 적용: 배경에 스며든 효과 */
-            transition: opacity 0.3s ease;
+            object-fit: cover; 
+            object-position: center 20%; 
+            opacity: 0.5; 
+            transition: 0.4s;
         }
         
-        /* 호버 시 투명도 회복 (선택사항 - 더 잘 보이게) */
-        .char-img-box:hover img {
-            opacity: 0.9;
-        }
+        .char-img-box:hover img { opacity: 1; transform: scale(1.05); }
 
-        /* 캐릭터 정보 텍스트 영역 비율 조정 */
-        .char-info { flex: 1.2; }
-        .char-info h2 { font-size: 2.5rem; color: var(--accent); margin: 0 0 20px 0; transition: 0.5s; }
-        .char-info p { font-size: 1.15rem; line-height: 1.8; opacity: 0.9; }
+        .char-info { width: 100%; text-align: center; }
+        @media (min-width: 768px) { .char-info { text-align: left; flex: 1.2; } }
+
+        .char-info h2 { font-size: clamp(1.8rem, 5vw, 2.5rem); color: var(--accent); margin: 0 0 15px 0; }
+        .char-info p { font-size: 1.05rem; line-height: 1.6; opacity: 0.9; word-break: keep-all; }
 
     </style>
 </head>
